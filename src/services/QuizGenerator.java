@@ -2,24 +2,30 @@ package services;
 
 import java.util.ArrayList;
 import java.util.List;
-import models.*;
 
+import models.*;
 import utils.Constants;
 
 public class QuizGenerator {
 
     public Quiz generateQuiz(String topic) {
+
         List<Question> questions = new ArrayList<>();
 
-        // Dummy logic (replace with DB/API later)
+        // Dummy Questions
         for (int i = 1; i <= Constants.TOTAL_QUESTIONS; i++) {
-            questions.add(new MCQQuestion(
-                    "Sample question " + i + " on " + topic,
+
+            String[] options = {
                     "Option A",
                     "Option B",
                     "Option C",
-                    "Option D",
-                    "A"
+                    "Option D"
+            };
+
+            questions.add(new MCQQuestion(
+                    "Sample question " + i + " on " + topic,
+                    "Option A",
+                    options
             ));
         }
 
@@ -27,7 +33,6 @@ public class QuizGenerator {
     }
 
     public List<Question> filterByDifficulty(List<Question> all, String level) {
-        // Placeholder for future AI/logic-based filtering
         return all;
     }
 }

@@ -21,12 +21,16 @@ public class ResultFrame extends JFrame {
                 SwingConstants.CENTER
         );
 
+        // Create object of RecommendationService
+        RecommendationService service = new RecommendationService();
+
         JLabel recommendation = new JLabel(
-                RecommendationService.getRecommendation(score),
+                service.getRecommendation(score),
                 SwingConstants.CENTER
         );
 
         JButton exit = new JButton("Exit");
+
         exit.addActionListener(e -> System.exit(0));
 
         panel.add(scoreLabel);
@@ -34,6 +38,7 @@ public class ResultFrame extends JFrame {
         panel.add(exit);
 
         add(panel);
+
         setVisible(true);
     }
 }
