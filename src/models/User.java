@@ -1,30 +1,17 @@
 package models;
 
 public class User {
+    private final String id;
+    private final String name;
+    private final String email;
 
-    private String username;
-    private String password;
-    private int totalScore;
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-        this.totalScore = 0;
+    public User(String id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public int getTotalScore() {
-        return totalScore;
-    }
-
-    public void addScore(int score) {
-        this.totalScore += score;
-    }
+    public String getId() { return id; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
 }

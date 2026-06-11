@@ -1,23 +1,23 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TrueFalseQuestion extends Question {
 
-    private boolean correctAnswer;
-
-    public TrueFalseQuestion(String questionText, boolean correctAnswer) {
-
-        super(questionText, String.valueOf(correctAnswer));
-
-        this.correctAnswer = correctAnswer;
+    public TrueFalseQuestion() {
+        super();
     }
 
-    public boolean getCorrectAnswer() {
-        return correctAnswer;
+    public TrueFalseQuestion(String id, String questionText, String correctAnswer) {
+        super(id, questionText, correctAnswer);
     }
 
     @Override
-    public boolean checkAnswer(String answer) {
-
-        return Boolean.parseBoolean(answer.toLowerCase()) == correctAnswer;
+    public List<String> getOptions() {
+        List<String> tfOptions = new ArrayList<>();
+        tfOptions.add("True");
+        tfOptions.add("False");
+        return tfOptions;
     }
 }

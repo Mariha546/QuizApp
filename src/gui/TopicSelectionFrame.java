@@ -4,33 +4,41 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TopicSelectionFrame extends JFrame {
-
     public TopicSelectionFrame() {
-
-        setTitle("Select Topic");
-        setSize(400, 300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setTitle("Choose Your Quiz");
+        setSize(500, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(new FlowLayout(FlowLayout.CENTER, 20, 25));
+        Theme.applyTheme(this);
 
-        JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
+        JLabel promptLabel = new JLabel("Select the topic you want to practice:");
+        Theme.styleLabel(promptLabel, Theme.TEXT_PRIMARY, new Font("Segoe UI", Font.PLAIN, 15));
+        add(promptLabel);
 
-        String[] topics = {"Java", "OOP", "Math"};
+        String[] frameworkThemesList = {"Java Polymorphism Concepts", "General Coding Basics", "Object-Oriented Programming"};
+        JComboBox<String> dropdownSelectionMenu = new JComboBox<>(frameworkThemesList);
+        dropdownSelectionMenu.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        dropdownSelectionMenu.setBackground(Theme.SURFACE);
+        dropdownSelectionMenu.setForeground(Theme.TEXT_PRIMARY);
+        add(dropdownSelectionMenu);
 
-        JComboBox<String> comboBox = new JComboBox<>(topics);
+        JButton loadLegacyEvaluationButton = new JButton("Start Standard Quiz");
+        Theme.styleButton(loadLegacyEvaluationButton, Theme.SURFACE, Theme.TEXT_PRIMARY);
+        add(loadLegacyEvaluationButton);
 
-        JButton start = new JButton("Start Quiz");
+        JButton loadAsyncAiEngineLaunchWindowButton = new JButton("Start AI Generated Quiz");
+        Theme.styleButton(loadAsyncAiEngineLaunchWindowButton, Theme.ACCENT_CYAN, Theme.BACKGROUND);
+        add(loadAsyncAiEngineLaunchWindowButton);
 
-        start.addActionListener(e -> {
-            String topic = comboBox.getSelectedItem().toString();
-            new QuizFrame(topic);
-            dispose();
+        loadLegacyEvaluationButton.addActionListener(action -> {
+            new QuizFrame((String) dropdownSelectionMenu.getSelectedItem()).setVisible(true);
+            this.dispose();
         });
 
-        panel.add(new JLabel("Choose Topic"));
-        panel.add(comboBox);
-        panel.add(start);
-
-        add(panel);
-        setVisible(true);
+        loadAsyncAiEngineLaunchWindowButton.addActionListener(action -> {
+            new AdaptiveTopicSelectionFrame().setVisible(true);
+            this.dispose();
+        });
     }
 }

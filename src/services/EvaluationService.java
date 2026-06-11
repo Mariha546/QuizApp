@@ -1,10 +1,10 @@
 package services;
 
-import models.Quiz;
+import models.Result;
 
 public class EvaluationService {
-
-    public int evaluateQuiz(Quiz quiz) {
-        return quiz.getScore();
+    public static Result evaluate(int score, int total, String topic) {
+        String feedback = RecommendationService.generateFeedback(score, total, topic);
+        return new Result(score, total, feedback);
     }
 }

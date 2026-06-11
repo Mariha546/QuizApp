@@ -1,36 +1,39 @@
 package models;
 
 public class Result {
+    private int verifiedScore;
+    private int maximumQuestions;
+    private String subjectMatterTopic;
 
-    private String username;
-    private int score;
-    private int totalQuestions;
-    private long timeTaken;
+    public Result() {}
 
-    public Result(String username, int score, int totalQuestions, long timeTaken) {
-        this.username = username;
-        this.score = score;
-        this.totalQuestions = totalQuestions;
-        this.timeTaken = timeTaken;
+    public Result(int verifiedScore, int maximumQuestions, String subjectMatterTopic) {
+        this.verifiedScore = verifiedScore;
+        this.maximumQuestions = maximumQuestions;
+        this.subjectMatterTopic = subjectMatterTopic;
     }
 
-    public String getUsername() {
-        return username;
+    public int getVerifiedScore() {
+        return verifiedScore;
     }
 
-    public int getScore() {
-        return score;
+    public void setVerifiedScore(int verifiedScore) {
+        this.verifiedScore = verifiedScore;
     }
 
-    public int getTotalQuestions() {
-        return totalQuestions;
+    public int getMaximumQuestions() {
+        return maximumQuestions;
     }
 
-    public long getTimeTaken() {
-        return timeTaken;
+    public void setMaximumQuestions(int maximumQuestions) {
+        this.maximumQuestions = maximumQuestions;
     }
 
-    public double getPercentage() {
-        return (double) score / totalQuestions * 100;
+    public String getSubjectMatterTopic() {
+        return subjectMatterTopic;
+    }
+
+    public void setSubjectMatterTopic(String subjectMatterTopic) {
+        this.subjectMatterTopic = subjectMatterTopic;
     }
 }

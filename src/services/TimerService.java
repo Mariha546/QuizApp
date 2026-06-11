@@ -1,40 +1,30 @@
 package services;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import javax.swing.JLabel;
+import javax.swing.Timer;
 
 public class TimerService {
+    private final Timer swingTimer;
+    private int remainingSeconds;
 
-    private Timer timer;
-    private int remainingTime;
+    public TimerService(int secondsLimit, JLabel visualLabel, Runnable onTimeUpCallback) {
+        this.remainingSeconds = secondsLimit;
+        visualLabel.setText("Time Remaining: " + remainingSeconds + "s");
 
-    public interface TimerListener {
-        void onTick(int secondsLeft);
-        void onFinish();
-    }
+        // We initialize the Timer first, referencing the callback smoothly
+        this.swingTimer = new Timer(1000, null);
 
-    public void startTimer(int seconds, TimerListener listener) {
-        remainingTime = seconds;
-
-        timer = new Timer();
-
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                if (remainingTime > 0) {
-                    listener.onTick(remainingTime);
-                    remainingTime--;
-                } else {
-                    timer.cancel();
-                    listener.onFinish();
-                }
+        // Then we define the action listener safely after initialization
+        this.swingTimer.addActionListener(event -> {
+            remainingSeconds--;
+            visualLabel.setText("Time Remaining: " + remainingSeconds + "s");
+            if (remainingSeconds <= 0) {
+                swingTimer.stop();
+                onTimeUpCallback.run();
             }
-        }, 0, 1000);
+        });
     }
 
-    public void stopTimer() {
-        if (timer != null) {
-            timer.cancel();
-        }
-    }
+    public void start() { swingTimer.start(); }
+    public void stop() { swingTimer.stop(); }
 }
